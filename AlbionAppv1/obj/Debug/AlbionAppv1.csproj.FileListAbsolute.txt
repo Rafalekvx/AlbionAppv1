@@ -1,0 +1,11 @@
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\bin\Debug\AlbionAppv1.exe.config
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\bin\Debug\AlbionAppv1.exe
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\bin\Debug\AlbionAppv1.pdb
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.csproj.AssemblyReference.cache
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.csproj.SuggestedBindingRedirects.cache
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.Form1.resources
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.Properties.Resources.resources
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.csproj.GenerateResource.cache
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.csproj.CoreCompileInputs.cache
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.exe
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.pdb
