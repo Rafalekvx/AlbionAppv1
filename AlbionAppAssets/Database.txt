@@ -10,6 +10,7 @@ Create table end_run(
 create table start_run (
 	id int NOT NULL IDENTITY(1,1),
 	tier	tinyint NOT NULL,
+	enchant tinyint NOT NULL,
 	current_silver	bigint NOT NULL,
 	current_item_value	bigint NOT NULL,
 	map_cost	int,

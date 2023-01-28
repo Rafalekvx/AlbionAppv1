@@ -10,6 +10,7 @@ namespace AlbionAppv1.Models
     {
         public int id { get; set; }
         public int tier { get; set; }
+        public int enchant { get; set; }
         public int current_silver { get; set; }
         public int current_item_value { get; set; }
         public int map_cost { get; set; }

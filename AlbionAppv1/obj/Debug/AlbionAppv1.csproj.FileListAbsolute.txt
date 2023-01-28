@@ -11,3 +11,4 @@ C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.exe
 C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.pdb
 C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.Form2.resources
 C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.Confirm.resources
+C:\Users\Rafalek\source\repos\AlbionAppv1\AlbionAppv1\obj\Debug\AlbionAppv1.End_run.resources

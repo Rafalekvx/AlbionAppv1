@@ -1,11 +1,18 @@
 /****** Script for SelectTopNRows command from SSMS  ******/
-SELECT TOP (1000) start_run.id
-      ,start_run.current_silver
-	  ,end_run.new_silver
-      ,start_run.current_item_value
-	  ,end_run.new_item_value
-	  ,start_run.start_time
-      ,[end_time]
-	  ,(end_run.new_silver - start_run.current_silver) + (end_run.new_item_value-start_run.current_item_value) AS profit
-	  ,DATEDIFF(minute,start_time,end_time) as timer
+SELECT TOP (1000) start_run.id,start_run.current_silver,end_run.new_silver,start_run.current_item_value,end_run.new_item_value,start_run.start_time,end_time,(end_run.new_silver - start_run.current_silver) + (end_run.new_item_value-start_run.current_item_value) AS profit,DATEDIFF(minute,start_time,end_time) as timer
   FROM [AlbionApp].[dbo].[end_run] inner join AlbionApp.dbo.start_run on  end_run.start_id=start_run.id where start_id = 1
+
+
+ string sqlcomm = $"INSERT INTO start_run (tier,current_silver,current_item_value,map_cost,zone,solo_duo,start_time)   VALUES (@tier,@current_silver,@current_item_value,@map_cost,@zone,@solo_duo,@start_time) ";
+                using (SqlCommand command = new SqlCommand(sqlcomm, sqlcon))
+                {
+                    command.Parameters.Add("@tier", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.tier.ToString());
+                    command.Parameters.Add("@current_silver", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.current_silver.ToString());
+                    command.Parameters.Add("@current_item_value", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.current_item_value.ToString());
+                    command.Parameters.Add("@map_cost", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.map_cost.ToString());
+                    command.Parameters.Add("@zone", SqlDbType.VarChar, 50).Value = Form2.Instance.startModel.zone;
+                    command.Parameters.Add("@solo_duo", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.solo_duo.ToString());
+                    command.Parameters.Add("@start_time", SqlDbType.Time, 7).Value = Form2.Instance.startModel.start_time.ToString("hh:mm");
+                    command.ExecuteNonQuery();
+                }
+                    

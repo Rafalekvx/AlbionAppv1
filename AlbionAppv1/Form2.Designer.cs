@@ -1,4 +1,6 @@
-﻿namespace AlbionAppv1
+﻿using AlbionAppv1.Models;
+
+namespace AlbionAppv1
 {
     partial class Form2
     {
@@ -30,7 +32,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tierBox = new System.Windows.Forms.TextBox();
             this.startTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,8 +41,10 @@
             this.currentSilver = new System.Windows.Forms.TextBox();
             this.currentItemValue = new System.Windows.Forms.TextBox();
             this.mapCost = new System.Windows.Forms.TextBox();
-            this.zone = new System.Windows.Forms.TextBox();
-            this.type = new System.Windows.Forms.TextBox();
+            this.typeSelect = new System.Windows.Forms.ComboBox();
+            this.zoneSelect = new System.Windows.Forms.ComboBox();
+            this.tierSelect = new System.Windows.Forms.ComboBox();
+            this.enchantSelect = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -50,7 +53,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(165, 84);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "Confirm data";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -62,13 +65,6 @@
             this.label1.Size = new System.Drawing.Size(25, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Tier";
-            // 
-            // tierBox
-            // 
-            this.tierBox.Location = new System.Drawing.Point(191, 65);
-            this.tierBox.Name = "tierBox";
-            this.tierBox.Size = new System.Drawing.Size(100, 20);
-            this.tierBox.TabIndex = 2;
             // 
             // startTimePicker
             // 
@@ -145,27 +141,59 @@
             this.mapCost.Size = new System.Drawing.Size(100, 20);
             this.mapCost.TabIndex = 11;
             // 
-            // zone
+            // typeSelect
             // 
-            this.zone.Location = new System.Drawing.Point(191, 211);
-            this.zone.Name = "zone";
-            this.zone.Size = new System.Drawing.Size(100, 20);
-            this.zone.TabIndex = 12;
+            this.typeSelect.DisplayMember = "Text";
+            this.typeSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeSelect.FormattingEnabled = true;
+            this.typeSelect.Location = new System.Drawing.Point(191, 256);
+            this.typeSelect.Name = "typeSelect";
+            this.typeSelect.Size = new System.Drawing.Size(121, 21);
+            this.typeSelect.TabIndex = 13;
+            this.typeSelect.ValueMember = "Id";
             // 
-            // type
+            // zoneSelect
             // 
-            this.type.Location = new System.Drawing.Point(191, 252);
-            this.type.Name = "type";
-            this.type.Size = new System.Drawing.Size(100, 20);
-            this.type.TabIndex = 13;
+            this.zoneSelect.DisplayMember = "Text";
+            this.zoneSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zoneSelect.FormattingEnabled = true;
+            this.zoneSelect.Location = new System.Drawing.Point(191, 215);
+            this.zoneSelect.Name = "zoneSelect";
+            this.zoneSelect.Size = new System.Drawing.Size(121, 21);
+            this.zoneSelect.TabIndex = 14;
+            this.zoneSelect.ValueMember = "Text";
+            // 
+            // tierSelect
+            // 
+            this.tierSelect.DisplayMember = "Text";
+            this.tierSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tierSelect.FormattingEnabled = true;
+            this.tierSelect.Location = new System.Drawing.Point(191, 69);
+            this.tierSelect.Name = "tierSelect";
+            this.tierSelect.Size = new System.Drawing.Size(48, 21);
+            this.tierSelect.TabIndex = 15;
+            this.tierSelect.ValueMember = "Text";
+            // 
+            // enchantSelect
+            // 
+            this.enchantSelect.DisplayMember = "Text";
+            this.enchantSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.enchantSelect.FormattingEnabled = true;
+            this.enchantSelect.Location = new System.Drawing.Point(245, 69);
+            this.enchantSelect.Name = "enchantSelect";
+            this.enchantSelect.Size = new System.Drawing.Size(48, 21);
+            this.enchantSelect.TabIndex = 16;
+            this.enchantSelect.ValueMember = "Text";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.type);
-            this.Controls.Add(this.zone);
+            this.Controls.Add(this.enchantSelect);
+            this.Controls.Add(this.tierSelect);
+            this.Controls.Add(this.zoneSelect);
+            this.Controls.Add(this.typeSelect);
             this.Controls.Add(this.mapCost);
             this.Controls.Add(this.currentItemValue);
             this.Controls.Add(this.currentSilver);
@@ -175,7 +203,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.startTimePicker);
-            this.Controls.Add(this.tierBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "Form2";
@@ -189,7 +216,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tierBox;
         private System.Windows.Forms.DateTimePicker startTimePicker;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -199,7 +225,9 @@
         private System.Windows.Forms.TextBox currentSilver;
         private System.Windows.Forms.TextBox currentItemValue;
         private System.Windows.Forms.TextBox mapCost;
-        private System.Windows.Forms.TextBox zone;
-        private System.Windows.Forms.TextBox type;
+        private System.Windows.Forms.ComboBox typeSelect;
+        private System.Windows.Forms.ComboBox zoneSelect;
+        private System.Windows.Forms.ComboBox tierSelect;
+        private System.Windows.Forms.ComboBox enchantSelect;
     }
 }
