@@ -29,17 +29,17 @@ namespace AlbionAppv1
                  };
 
             enchantSelect.DataSource = new ComboItem[] {
-                new ComboItem{Id = 1, Text ="-1" },
                 new ComboItem{Id = 1, Text ="0" },
-                new ComboItem{Id = 1, Text ="1" },
-                new ComboItem{Id = 1, Text ="2" },
+                new ComboItem{Id = 2, Text ="1" },
+                new ComboItem{Id = 3, Text ="2" },
+                new ComboItem{Id = 4, Text ="3" },
                 };         
             
             zoneSelect.DataSource = new ComboItem[] {
                 new ComboItem{Id = 1, Text ="Blue" },
-                new ComboItem{Id = 1, Text ="Yellow" },
-                new ComboItem{Id = 1, Text ="Red" },
-                new ComboItem{Id = 1, Text ="Black" },
+                new ComboItem{Id = 2, Text ="Yellow" },
+                new ComboItem{Id = 3, Text ="Red" },
+                new ComboItem{Id = 4, Text ="Black" },
                 };
 
             typeSelect.DataSource = new ComboItem[] {
@@ -62,8 +62,10 @@ namespace AlbionAppv1
             startModel.solo_duo = int.Parse(typeSelect.SelectedValue.ToString());
             startModel.start_time = startTimePicker.Value;
 
+            this.Hide();
             Confirm confForm = new Confirm();
             confForm.ShowDialog();
+            this.Close();
         }
     }
 }

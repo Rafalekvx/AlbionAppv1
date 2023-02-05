@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlbionAppv1.Menu;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,6 +47,11 @@ namespace AlbionAppv1
 
                 sqlcon.Close();
             }
+
+            this.Hide();
+            Form1 backToMenu = new Form1();
+            backToMenu.ShowDialog();
+            this.Close();
         }
     }
 }

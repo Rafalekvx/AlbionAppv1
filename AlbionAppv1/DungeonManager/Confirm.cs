@@ -16,40 +16,15 @@ namespace AlbionAppv1
     {
         public static Confirm Instance;
         public string connectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=AlbionApp; Integrated Security=True;";
+        public List<start_runModel> list = new List<start_runModel> { Form2.Instance.startModel };
+        public DataTable dt = new DataTable();
+
         public Confirm()
         {
             InitializeComponent();
             Instance = this;
         }
 
-        private void confirmButton_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection sqlcon = new SqlConnection(connectionString))
-            {
-                
-                sqlcon.Open();
-                string sqlcomm = $"INSERT INTO start_run (tier,enchant,current_silver,current_item_value,map_cost,zone,solo_duo,start_time)   VALUES (@tier,@enchant,@current_silver,@current_item_value,@map_cost,@zone,@solo_duo,@start_time) ";
-                using (SqlCommand command = new SqlCommand(sqlcomm, sqlcon))
-                {
-                    command.Parameters.Add("@tier", SqlDbType.Int, 3).Value = int.Parse(Form2.Instance.startModel.tier.ToString());
-                    command.Parameters.Add("@enchant", SqlDbType.Int, 3).Value = int.Parse(Form2.Instance.startModel.enchant.ToString());
-                    command.Parameters.Add("@current_silver", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.current_silver.ToString());
-                    command.Parameters.Add("@current_item_value", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.current_item_value.ToString());
-                    command.Parameters.Add("@map_cost", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.map_cost.ToString());
-                    command.Parameters.Add("@zone", SqlDbType.VarChar, 50).Value = Form2.Instance.startModel.zone;
-                    command.Parameters.Add("@solo_duo", SqlDbType.Int, 32).Value = int.Parse(Form2.Instance.startModel.solo_duo.ToString());
-                    command.Parameters.Add("@start_time", SqlDbType.Time, 7).Value = Form2.Instance.startModel.start_time.ToString("hh:mm");
-                    command.ExecuteNonQuery();
-                }
-                    
-                sqlcon.Close();
-            }
-
-            End_run endRunForm = new End_run();
-            endRunForm.ShowDialog();
-
-
-        }
 
         private DataTable MakePivotTable(DataTable mainTable)
         {
@@ -82,17 +57,18 @@ namespace AlbionAppv1
         private void Confirm_Load(object sender, EventArgs e)
         {
 
-            label1.Text = Form2.Instance.startModel.tier.ToString() ;
-
             dataFromForm.AutoGenerateColumns = true;
             dataFromForm.AutoSize = true;
-            List<start_runModel> list = new List<start_runModel> { Form2.Instance.startModel };
+            
 
-            DataTable dt = new DataTable();
-
-            dt.Columns.Add("Tier");
-            dt.Columns.Add(Form2.Instance.startModel.tier.ToString());
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Value");
             DataRow dr = null;
+
+            dr = dt.NewRow();
+            dr[0] = "Tier";
+            dr[1] = Form2.Instance.startModel.tier.ToString();
+            dt.Rows.Add(dr);
 
             dr = dt.NewRow();
             dr[0] = "Enchant";
@@ -128,10 +104,40 @@ namespace AlbionAppv1
 
             dr = dt.NewRow();
             dr[0] = "Start Time";
-            dr[1] = Form2.Instance.startModel.start_time.ToString();
+            dr[1] = Form2.Instance.startModel.start_time.ToString("hh:mm");
             dt.Rows.Add(dr);
 
             dataFromForm.DataSource = dt;
         }
+
+        private void confirmButton_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection sqlcon = new SqlConnection(connectionString))
+            {
+
+                sqlcon.Open();
+                string sqlcomm = $"INSERT INTO start_run (tier,enchant,current_silver,current_item_value,map_cost,zone,solo_duo,start_time)   VALUES (@tier,@enchant,@current_silver,@current_item_value,@map_cost,@zone,@solo_duo,@start_time) ";
+                using (SqlCommand command = new SqlCommand(sqlcomm, sqlcon))
+                {
+                    command.Parameters.Add("@tier", SqlDbType.Int, 3).Value = int.Parse(dt.Rows[0][1].ToString()); ;
+                    command.Parameters.Add("@enchant", SqlDbType.Int, 3).Value = int.Parse(dt.Rows[1][1].ToString());
+                    command.Parameters.Add("@current_silver", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[2][1].ToString());
+                    command.Parameters.Add("@current_item_value", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[3][1].ToString());
+                    command.Parameters.Add("@map_cost", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[4][1].ToString());
+                    command.Parameters.Add("@zone", SqlDbType.VarChar, 50).Value = dt.Rows[5][1].ToString();
+                    command.Parameters.Add("@solo_duo", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[6][1].ToString());
+                    command.Parameters.Add("@start_time", SqlDbType.Time, 7).Value = dt.Rows[7][1].ToString();
+                    command.ExecuteNonQuery();
+                }
+
+                sqlcon.Close();
+            }
+            this.Hide();
+            End_run endRunForm = new End_run();
+            endRunForm.ShowDialog();
+            this.Close();
+
+        }
+
     }
 }

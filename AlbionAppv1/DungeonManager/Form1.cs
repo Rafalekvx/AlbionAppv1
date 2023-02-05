@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlbionAppv1.Menu;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,10 +39,19 @@ namespace AlbionAppv1
 
         private void starterButton_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form2 addForm = new Form2();
             addForm.ShowDialog();
-            
+            this.Close();
 
+        }
+
+        private void BackToMenuButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            StartMenu startMenu = new StartMenu();
+            startMenu.ShowDialog();
+            this.Close();
         }
     }
 }
