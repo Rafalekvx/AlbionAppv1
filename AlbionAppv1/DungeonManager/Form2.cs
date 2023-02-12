@@ -52,20 +52,27 @@ namespace AlbionAppv1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!(string.IsNullOrEmpty(currentSilver.Text)) && !(string.IsNullOrEmpty(currentItemValue.Text)) && !(string.IsNullOrEmpty(mapCost.Text)))
+            {
+                startModel.tier = int.Parse(tierSelect.SelectedValue.ToString());
+                startModel.enchant = int.Parse(enchantSelect.SelectedValue.ToString());
+                startModel.current_silver = int.Parse(currentSilver.Text);
+                startModel.current_item_value = int.Parse(currentItemValue.Text);
+                startModel.map_cost = int.Parse(mapCost.Text);
+                startModel.zone = zoneSelect.SelectedValue.ToString();
+                startModel.solo_duo = int.Parse(typeSelect.SelectedValue.ToString());
+                startModel.start_time = startTimePicker.Value;
 
-            startModel.tier = int.Parse(tierSelect.SelectedValue.ToString());
-            startModel.enchant = int.Parse(enchantSelect.SelectedValue.ToString());
-            startModel.current_silver = int.Parse(currentSilver.Text);
-            startModel.current_item_value = int.Parse(currentItemValue.Text);
-            startModel.map_cost = int.Parse(mapCost.Text);
-            startModel.zone = zoneSelect.SelectedValue.ToString();
-            startModel.solo_duo = int.Parse(typeSelect.SelectedValue.ToString());
-            startModel.start_time = startTimePicker.Value;
+                this.Hide();
+                Confirm confForm = new Confirm();
+                confForm.ShowDialog();
+                this.Close();
+            }
 
-            this.Hide();
-            Confirm confForm = new Confirm();
-            confForm.ShowDialog();
-            this.Close();
+            else
+            {
+                MessageBox.Show("You must fill all values!", "Insert all values!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

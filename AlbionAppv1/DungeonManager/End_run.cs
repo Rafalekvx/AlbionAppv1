@@ -23,35 +23,44 @@ namespace AlbionAppv1
 
         private void endRunButton_Click(object sender, EventArgs e)
         {
-            using (SqlConnection sqlcon = new SqlConnection(connectionString))
+
+            if (!(string.IsNullOrEmpty(newSilver.Text)) && !(string.IsNullOrEmpty(newItemValue.Text)))
             {
-
-                sqlcon.Open();
-                SqlDataAdapter getStartRunId = new SqlDataAdapter("SELECT MAX(id) from start_run", sqlcon);
-                int startRunId = 0;
-                DataTable dtbl = new DataTable();
-                getStartRunId.Fill(dtbl);
-
-                startRunId = dtbl.Rows[0].Field<int>(0);
-
-
-                string sqlcomm = $"INSERT INTO end_run (new_silver,new_item_value,end_time,start_id)   VALUES (@new_silver,@new_item_value,@end_time,@start_id) ";
-                using (SqlCommand command = new SqlCommand(sqlcomm, sqlcon))
+                using (SqlConnection sqlcon = new SqlConnection(connectionString))
                 {
-                    command.Parameters.Add("@new_silver", SqlDbType.Int, 32).Value = int.Parse(newSilver.Text);
-                    command.Parameters.Add("@new_item_value", SqlDbType.Int, 32).Value = int.Parse(newItemValue.Text);
-                    command.Parameters.Add("@end_time", SqlDbType.Time, 7).Value = endRunTimePicker.Value.ToString("hh:mm");
-                    command.Parameters.Add("@start_id", SqlDbType.Int, 32).Value = startRunId;
-                    command.ExecuteNonQuery();
+
+                    sqlcon.Open();
+                    SqlDataAdapter getStartRunId = new SqlDataAdapter("SELECT MAX(id) from start_run", sqlcon);
+                    int startRunId = 0;
+                    DataTable dtbl = new DataTable();
+                    getStartRunId.Fill(dtbl);
+
+                    startRunId = dtbl.Rows[0].Field<int>(0);
+
+
+                    string sqlcomm = $"INSERT INTO end_run (new_silver,new_item_value,end_time,start_id)   VALUES (@new_silver,@new_item_value,@end_time,@start_id) ";
+                    using (SqlCommand command = new SqlCommand(sqlcomm, sqlcon))
+                    {
+                        command.Parameters.Add("@new_silver", SqlDbType.Int, 32).Value = int.Parse(newSilver.Text);
+                        command.Parameters.Add("@new_item_value", SqlDbType.Int, 32).Value = int.Parse(newItemValue.Text);
+                        command.Parameters.Add("@end_time", SqlDbType.Time, 7).Value = endRunTimePicker.Value.ToString("hh:mm");
+                        command.Parameters.Add("@start_id", SqlDbType.Int, 32).Value = startRunId;
+                        command.ExecuteNonQuery();
+                    }
+
+                    sqlcon.Close();
                 }
 
-                sqlcon.Close();
+                this.Hide();
+                Form1 backToMenu = new Form1();
+                backToMenu.ShowDialog();
+                this.Close();
             }
 
-            this.Hide();
-            Form1 backToMenu = new Form1();
-            backToMenu.ShowDialog();
-            this.Close();
+            else
+            {
+                MessageBox.Show("You must fill all values!", "Insert all values!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

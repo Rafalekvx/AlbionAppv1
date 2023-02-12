@@ -112,31 +112,45 @@ namespace AlbionAppv1
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            using (SqlConnection sqlcon = new SqlConnection(connectionString))
+            if (!(string.IsNullOrEmpty(dt.Rows[0][1].ToString()))
+                && !(string.IsNullOrEmpty(dt.Rows[1][1].ToString()))
+                && !(string.IsNullOrEmpty(dt.Rows[2][1].ToString()))
+                && !(string.IsNullOrEmpty(dt.Rows[3][1].ToString()))
+                && !(string.IsNullOrEmpty(dt.Rows[4][1].ToString()))
+                && !(string.IsNullOrEmpty(dt.Rows[5][1].ToString()))
+                && !(string.IsNullOrEmpty(dt.Rows[6][1].ToString()))
+                && !(string.IsNullOrEmpty(dt.Rows[7][1].ToString())))
             {
-
-                sqlcon.Open();
-                string sqlcomm = $"INSERT INTO start_run (tier,enchant,current_silver,current_item_value,map_cost,zone,solo_duo,start_time)   VALUES (@tier,@enchant,@current_silver,@current_item_value,@map_cost,@zone,@solo_duo,@start_time) ";
-                using (SqlCommand command = new SqlCommand(sqlcomm, sqlcon))
+                using (SqlConnection sqlcon = new SqlConnection(connectionString))
                 {
-                    command.Parameters.Add("@tier", SqlDbType.Int, 3).Value = int.Parse(dt.Rows[0][1].ToString()); ;
-                    command.Parameters.Add("@enchant", SqlDbType.Int, 3).Value = int.Parse(dt.Rows[1][1].ToString());
-                    command.Parameters.Add("@current_silver", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[2][1].ToString());
-                    command.Parameters.Add("@current_item_value", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[3][1].ToString());
-                    command.Parameters.Add("@map_cost", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[4][1].ToString());
-                    command.Parameters.Add("@zone", SqlDbType.VarChar, 50).Value = dt.Rows[5][1].ToString();
-                    command.Parameters.Add("@solo_duo", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[6][1].ToString());
-                    command.Parameters.Add("@start_time", SqlDbType.Time, 7).Value = dt.Rows[7][1].ToString();
-                    command.ExecuteNonQuery();
+
+                    sqlcon.Open();
+                    string sqlcomm = $"INSERT INTO start_run (tier,enchant,current_silver,current_item_value,map_cost,zone,solo_duo,start_time)   VALUES (@tier,@enchant,@current_silver,@current_item_value,@map_cost,@zone,@solo_duo,@start_time) ";
+                    using (SqlCommand command = new SqlCommand(sqlcomm, sqlcon))
+                    {
+                        command.Parameters.Add("@tier", SqlDbType.Int, 3).Value = int.Parse(dt.Rows[0][1].ToString()); ;
+                        command.Parameters.Add("@enchant", SqlDbType.Int, 3).Value = int.Parse(dt.Rows[1][1].ToString());
+                        command.Parameters.Add("@current_silver", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[2][1].ToString());
+                        command.Parameters.Add("@current_item_value", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[3][1].ToString());
+                        command.Parameters.Add("@map_cost", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[4][1].ToString());
+                        command.Parameters.Add("@zone", SqlDbType.VarChar, 50).Value = dt.Rows[5][1].ToString();
+                        command.Parameters.Add("@solo_duo", SqlDbType.Int, 32).Value = int.Parse(dt.Rows[6][1].ToString());
+                        command.Parameters.Add("@start_time", SqlDbType.Time, 7).Value = dt.Rows[7][1].ToString();
+                        command.ExecuteNonQuery();
+                    }
+
+                    sqlcon.Close();
                 }
-
-                sqlcon.Close();
+                this.Hide();
+                End_run endRunForm = new End_run();
+                endRunForm.ShowDialog();
+                this.Close();
             }
-            this.Hide();
-            End_run endRunForm = new End_run();
-            endRunForm.ShowDialog();
-            this.Close();
 
+            else
+            {
+                MessageBox.Show("You must fill all values!", "Insert all values!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }
